@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Global Luxury Restaurant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -10,7 +10,9 @@
             --primary: #0d1b21; --dark: #1b263b; --white: #415a77; --bg: #1b263b; --accent: #f39c12;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #fff; padding-bottom: 120px; transition: 0.3s; overflow-x: hidden; }
+        * { box-sizing: border-box; }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: #fff; padding-bottom: 120px; transition: 0.3s; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
 
         header { background: var(--white); padding: 12px 5%; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: auto; }
@@ -18,7 +20,6 @@
         .nav-links a { color: #fff; text-decoration: none; margin: 0 10px; font-weight: 600; cursor: pointer; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* قائمة اللغات */
         .lang-dropdown { position: relative; }
         .dropbtn { 
             background: rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 30px; 
@@ -28,21 +29,19 @@
             display: none; position: absolute; background: white; min-width: 160px; left: 0; 
             border-radius: 12px; overflow-y: auto; max-height: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1001; 
         }
-        .dropdown-content button { color: #333; padding: 10px; width: 100%; border: none; background: none; text-align: center; cursor: pointer; font-weight: 600; border-bottom: 1px solid #eee; }
+        .dropdown-content button { color: #333; padding: 12px; width: 100%; border: none; background: none; text-align: center; cursor: pointer; font-weight: 600; border-bottom: 1px solid #eee; display: block; }
         .dropdown-content button:hover { background: var(--accent); color: white; }
         .lang-dropdown:hover .dropdown-content { display: block; }
 
         .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200'); background-size: cover; background-position: center; height: 250px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 
-        /* الشريط الدوار */
         .auto-slider { width: 100%; overflow: hidden; background: rgba(0,0,0,0.4); padding: 15px 0; border-bottom: 3px solid var(--accent); }
-        .slider-track { display: inline-flex; gap: 15px; animation: scroll 150s linear infinite; }
+        .slider-track { display: inline-flex; gap: 15px; animation: scroll 150s linear infinite; -webkit-animation: scroll 150s linear infinite; }
         .auto-slider:hover .slider-track { animation-play-state: paused; }
         .slide-item { position: relative; display: inline-block; cursor: pointer; }
         .slide-item img { height: 130px; width: 190px; object-fit: cover; border-radius: 12px; transition: 0.4s; }
 
-        /* شبكة المنيو */
-        .container { width: 100%; padding: 40px 5%; box-sizing: border-box; }
+        .container { width: 100%; padding: 40px 5%; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .menu-item { background: var(--white); border-radius: 20px; overflow: hidden; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .menu-item img { width: 100%; height: 250px; object-fit: cover; cursor: pointer; transition: 0.5s ease; }
@@ -53,53 +52,51 @@
         .add-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
         .add-btn:hover { background: var(--accent); }
 
-        /* نافذة المكونات */
-        #lightbox { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        .modal-card { background: #fff; color: #333; width: 90%; max-width: 800px; display: flex; border-radius: 20px; overflow: hidden; position: relative; animation: zoomEffect 0.3s ease; }
+        #lightbox { display: none; position: fixed; z-index: 5000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; padding: 10px; }
+        .modal-card { background: #fff; color: #333; width: 90%; max-width: 800px; display: flex; border-radius: 20px; overflow: hidden; position: relative; animation: zoomEffect 0.3s ease; -webkit-animation: zoomEffect 0.3s ease; }
         .modal-img-container { width: 50%; background: #000; }
         .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
         .modal-details { width: 50%; padding: 30px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; }
-        .ingredients-list { margin: 15px 0; padding: 0; list-style: none; text-align: right; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; z-index: 10; }
+        .ingredients-list { margin: 15px 0; padding: 0; list-style: none; }
         .ingredients-list li { margin-bottom: 8px; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 8px; }
-        .ingredients-list li::before { content: "•"; color: var(--accent); font-weight: bold; }
 
-        /* تعديل صندوق الموقع ليكون مصغراً */
-        .location-section { 
-            background: #fff; color: #222; margin: 20px auto; padding: 15px 25px; border-radius: 15px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); max-width: 800px; width: 90%;
-        }
+        .location-section { background: #fff; color: #222; margin: 20px auto; padding: 15px 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); max-width: 800px; width: 90%; }
         .location-container { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
         .location-info { flex: 1; min-width: 200px; }
         .map-container { flex: 1; min-width: 250px; height: 160px; border-radius: 10px; overflow: hidden; border: 1px solid #eee; }
 
-        /* نموذج البيانات */
         .customer-info-section { background: #fff; color: #222; margin: 40px 5%; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
-        .form-group input { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 12px; font-size: 1rem; box-sizing: border-box; outline: none; transition: 0.3s; }
+        .form-group input { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 12px; font-size: 1rem; outline: none; transition: 0.3s; }
 
-        /* شريط الطلب السفلي */
-        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #fff; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 2000; box-shadow: 0 -10px 40px rgba(0,0,0,0.4); color: #333; box-sizing: border-box; }
+        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #fff; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 2000; box-shadow: 0 -10px 40px rgba(0,0,0,0.4); color: #333; }
         .whatsapp-send { background: #25d366; color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 10px; border: none; cursor: pointer; font-size: 1.1rem; }
 
-        /* الحقوق المحفوظة */
         .footer-rights { background: #0d1b21; color: #888; text-align: center; padding: 20px; margin-bottom: 100px; font-size: 0.9rem; }
 
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+        @-webkit-keyframes scroll { 0% { -webkit-transform: translateX(0); } 100% { -webkit-transform: translateX(50%); } }
         @keyframes zoomEffect { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
         .hidden { display: none; }
         .section-title { text-align: center; font-size: 2.5rem; margin: 50px 0; color: var(--accent); text-transform: uppercase; }
 
         [dir="ltr"] .modal-card { flex-direction: row; }
         [dir="rtl"] .modal-card { flex-direction: row-reverse; }
         [dir="ltr"] .ingredients-list { text-align: left; }
-        
+        [dir="rtl"] .ingredients-list { text-align: right; }
+        [dir="rtl"] .ingredients-list li::after { content: "•"; color: var(--accent); font-weight: bold; margin-left: 8px;}
+        [dir="ltr"] .ingredients-list li::before { content: "•"; color: var(--accent); font-weight: bold; margin-right: 8px;}
+
         @media (max-width: 768px) {
-            .modal-card { flex-direction: column !important; height: 90vh; overflow-y: auto; }
+            .modal-card { flex-direction: column !important; height: auto; max-height: 90vh; overflow-y: auto; }
             .modal-img-container, .modal-details { width: 100%; }
-            .modal-img-container { height: 250px; }
+            .modal-img-container { height: 200px; }
             .location-container { flex-direction: column; text-align: center; }
+            .cart-bar { flex-direction: column; gap: 10px; padding: 15px; }
+            .whatsapp-send { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -108,9 +105,7 @@
 <div id="lightbox" onclick="if(event.target==this) this.style.display='none'">
     <div class="modal-card">
         <span class="close-btn" onclick="document.getElementById('lightbox').style.display='none'">×</span>
-        <div class="modal-img-container">
-            <img id="modal-img" src="">
-        </div>
+        <div class="modal-img-container"><img id="modal-img" src="" alt="product"></div>
         <div class="modal-details">
             <h2 id="modal-title" style="margin-top:0; color:var(--primary);"></h2>
             <p id="modal-price-tag" style="color:var(--accent); font-weight:bold; font-size:1.4rem; margin:10px 0;"></p>
@@ -134,15 +129,11 @@
             <button class="dropbtn"><i class="fas fa-globe"></i> <span id="l-btn">AR / EN</span></button>
             <div class="dropdown-content">
                 <button onclick="setLang('ar')">العربية</button>
-                <button onclick="setLang('ku')">Kurdî</button>
                 <button onclick="setLang('en')">English</button>
                 <button onclick="setLang('de')">Deutsch</button>
                 <button onclick="setLang('tr')">Türkçe</button>
                 <button onclick="setLang('it')">Italiano</button>
                 <button onclick="setLang('es')">Español</button>
-                <button onclick="setLang('zh')">中文 (Chinese)</button>
-                <button onclick="setLang('ja')">日本語 (Japanese)</button>
-                <button onclick="setLang('ko')">한국어 (Korean)</button>
             </div>
         </div>
     </div>
@@ -182,7 +173,7 @@
             </p>
         </div>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115981.39343729918!2d46.612503204990665!3d24.71355169733475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d48939b%3A0x88676a7c87503560!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://maps.google.com/maps?q=Riyadh&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 </section>
@@ -212,59 +203,21 @@
         sweet: ["كريمة طازجة", "شوكولاتة سويسرية", "مكسرات محمصة", "فانيليا"]
     };
 
-    const foodImages = [
-        "https://images.pexels.com/photos/1633525/pexels-photo-1633525.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/803964/pexels-photo-803964.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/718742/pexels-photo-718742.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/3926124/pexels-photo-3926124.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&w=800"
-    ];
-
-    const drinkImages = [
-        "https://images.pexels.com/photos/1200348/pexels-photo-1200348.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1187317/pexels-photo-1187317.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1560549/pexels-photo-1560549.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/434298/pexels-photo-434298.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1233319/pexels-photo-1233319.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1194030/pexels-photo-1194030.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1484678/pexels-photo-1484678.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&w=800"
-    ];
-
-    const sweetImages = [
-        "https://images.pexels.com/photos/4110007/pexels-photo-4110007.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2144112/pexels-photo-2144112.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/205961/pexels-photo-205961.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2067406/pexels-photo-2067406.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/14107/pexels-photo-14107.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2373520/pexels-photo-2373520.jpeg?auto=compress&cs=tinysrgb&w=800",
-        "https://images.pexels.com/photos/2693447/pexels-photo-2693447.jpeg?auto=compress&cs=tinysrgb&w=800"
-    ];
+    const foodImages = ["https://images.pexels.com/photos/1633525/pexels-photo-1633525.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/803964/pexels-photo-803964.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/718742/pexels-photo-718742.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/3926124/pexels-photo-3926124.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&w=800"];
+    const drinkImages = ["https://images.pexels.com/photos/1200348/pexels-photo-1200348.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1187317/pexels-photo-1187317.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1560549/pexels-photo-1560549.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/434298/pexels-photo-434298.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1233319/pexels-photo-1233319.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1194030/pexels-photo-1194030.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1484678/pexels-photo-1484678.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1028637/pexels-photo-1028637.jpeg?auto=compress&cs=tinysrgb&w=800"];
+    const sweetImages = ["https://images.pexels.com/photos/4110007/pexels-photo-4110007.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2144112/pexels-photo-2144112.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/205961/pexels-photo-205961.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2067406/pexels-photo-2067406.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/14107/pexels-photo-14107.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/1854652/pexels-photo-1854652.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2373520/pexels-photo-2373520.jpeg?auto=compress&cs=tinysrgb&w=800","https://images.pexels.com/photos/2693447/pexels-photo-2693447.jpeg?auto=compress&cs=tinysrgb&w=800"];
 
     const translations = {
-        ar: { logo: "مطعمنا الملكي", home: "الرئيسية", food: "المأكولات", drinks: "المشروبات", sweets: "الحلويات", hTitle: "المنيو الملكي", hDesc: "استمتع بالطعم العالمي الأصيل", fHead: "معلومات التوصيل", name: "الاسم الكامل", phone: "رقم الجوال", addr: "العنوان بالتفصيل", total: "الإجمالي", send: "إرسال عبر واتساب", add: "إضافة للسلة", ingLabel: "المكونات:", rights: "© 2024 جميع الحقوق محفوظة لمطعم الفخامة العالمي", dir: "rtl" },
-        en: { logo: "Royal Restaurant", home: "Home", food: "Cuisine", drinks: "Drinks", sweets: "Desserts", hTitle: "Royal Menu", hDesc: "Authentic global taste", fHead: "Delivery Info", name: "Full Name", phone: "Phone", addr: "Address", total: "Total", send: "Order via WhatsApp", add: "Add to Cart", ingLabel: "Ingredients:", rights: "© 2024 All Rights Reserved - Global Luxury Restaurant", dir: "ltr" }
+        ar: { logo: "مطعمنا الملكي", home: "الرئيسية", food: "المأكولات", drinks: "المشروبات", sweets: "الحلويات", hTitle: "المنيو الملكي", hDesc: "استمتع بالطعم العالمي الأصيل", fHead: "معلومات التوصيل", name: "الاسم الكامل", phone: "رقم الجوال", addr: "العنوان بالتفصيل", total: "الإجمالي", send: "إرسال عبر واتساب", add: "إضافة للسلة", ingLabel: "المكونات:", rights: "© 2024 جميع الحقوق محفوظة لمطعم الفخامة العالمي", dir: "rtl", itemText: "وجبة" },
+        en: { logo: "Royal Restaurant", home: "Home", food: "Cuisine", drinks: "Drinks", sweets: "Desserts", hTitle: "Royal Menu", hDesc: "Authentic global taste", fHead: "Delivery Info", name: "Full Name", phone: "Phone", addr: "Address", total: "Total", send: "Order via WhatsApp", add: "Add to Cart", ingLabel: "Ingredients:", rights: "© 2024 All Rights Reserved", dir: "ltr", itemText: "Item" },
+        de: { logo: "Königliches Restaurant", home: "Startseite", food: "Essen", drinks: "Getränke", sweets: "Süßigkeiten", hTitle: "Königliches Menü", hDesc: "Authentischer Geschmack", fHead: "Lieferinfo", name: "Name", phone: "Telefon", addr: "Adresse", total: "Gesamt", send: "Bestellen", add: "Hinzufügen", ingLabel: "Zutaten:", rights: "© 2024 Alle Rechte vorbehalten", dir: "ltr", itemText: "Gericht" },
+        tr: { logo: "Kraliyet Restoranı", home: "Anasayfa", food: "Yemekler", drinks: "İçecekler", sweets: "Tatlılar", hTitle: "Kraliyet Menüsü", hDesc: "Otantik Küresel Tat", fHead: "Teslimat Bilgisi", name: "İsim", phone: "Telefon", addr: "Adres", total: "Toplam", send: "Sipariş Ver", add: "Ekle", ingLabel: "İçindekiler:", rights: "© 2024 Tüm hakları saklıdır", dir: "ltr", itemText: "Yemek" },
+        it: { logo: "Ristorante Reale", home: "Home", food: "Cucina", drinks: "Bevande", sweets: "Dolci", hTitle: "Menu Reale", hDesc: "Gusto globale autentico", fHead: "Info Consegna", name: "Nome", phone: "Telefono", addr: "Indirizzo", total: "Totale", send: "Ordina", add: "Aggiungi", ingLabel: "Ingredienti:", rights: "© 2024 Tutti i diritti riservati", dir: "ltr", itemText: "Piatto" },
+        es: { logo: "Restaurante Real", home: "Inicio", food: "Cocina", drinks: "Bebidas", sweets: "Postres", hTitle: "Menú Real", hDesc: "Auténtico sabor global", fHead: "Info de Entrega", name: "Nombre", phone: "Teléfono", addr: "Dirección", total: "Total", send: "Pedir", add: "Añadir", ingLabel: "Ingredientes:", rights: "© 2024 Reservados todos los derechos", dir: "ltr", itemText: "Plato" }
     };
 
     let curLangKey = 'ar';
+    let cart = [], total = 0;
 
     function setLang(l) {
         curLangKey = l;
@@ -289,14 +242,23 @@
         document.getElementById('ing-label').innerText = d.ingLabel;
         document.getElementById('l-rights').innerHTML = d.rights;
         document.getElementById('l-btn').innerText = l.toUpperCase();
-        document.querySelectorAll('.add-btn').forEach(btn => btn.innerText = d.add);
+        
+        // تحديث محتوى الشبكة فور تغيير اللغة
+        refreshContent();
+    }
+
+    function refreshContent() {
+        const itemPrefix = translations[curLangKey].itemText;
+        document.getElementById('dynamic-slider').innerHTML = ""; // تصفير السلايدر لإعادة التعبئة
+        fillGrid('food-grid', foodImages, itemPrefix, 'food');
+        fillGrid('drinks-grid', drinkImages, itemPrefix, 'drink');
+        fillGrid('sweets-grid', sweetImages, itemPrefix, 'sweet');
     }
 
     function openProductModal(src, name, price, type) {
         document.getElementById('modal-img').src = src;
         document.getElementById('modal-title').innerText = name;
         document.getElementById('modal-price-tag').innerText = `$${price}`;
-        
         const list = document.getElementById('modal-ingredients');
         list.innerHTML = "";
         ingData[type].forEach(item => {
@@ -304,44 +266,27 @@
             li.innerText = item;
             list.appendChild(li);
         });
-
         const addBtn = document.getElementById('modal-add-btn');
-        addBtn.onclick = () => { addItem(name, price); document.getElementById('lightbox').style.display='none'; };
         addBtn.innerText = translations[curLangKey].add;
-
+        addBtn.onclick = () => { addItem(name, price); document.getElementById('lightbox').style.display='none'; };
         document.getElementById('lightbox').style.display = 'flex';
     }
 
-    const sliderTrack = document.getElementById('dynamic-slider');
-
     function fillGrid(gridId, images, labelPre, type) {
         let html = "";
+        const sliderTrack = document.getElementById('dynamic-slider');
         images.forEach((img, i) => {
             const price = 15 + i;
             const itemName = `${labelPre} ${i+1}`;
-            html += `
-                <div class="menu-item">
-                    <img src="${img}" onclick="openProductModal('${img}', '${itemName}', ${price}, '${type}')">
-                    <div class="item-info">
-                        <h3>${itemName}</h3>
-                        <p style="color:var(--accent); font-weight:bold; font-size:1.3rem;">$${price}</p>
-                        <button class="add-btn" onclick="addItem('${itemName}', ${price})">Add</button>
-                    </div>
-                </div>`;
+            html += `<div class="menu-item"><img src="${img}" onclick="openProductModal('${img}','${itemName}',${price},'${type}')" alt="item"><div class="item-info"><h3>${itemName}</h3><p style="color:var(--accent); font-weight:bold; font-size:1.3rem;">$${price}</p><button class="add-btn" onclick="addItem('${itemName}',${price})">${translations[curLangKey].add}</button></div></div>`;
             
             const slide = document.createElement('div');
             slide.className = 'slide-item';
-            slide.innerHTML = `<img src="${img}" onclick="openProductModal('${img}', '${itemName}', ${price}, '${type}')">`;
+            slide.innerHTML = `<img src="${img}" onclick="openProductModal('${img}','${itemName}',${price},'${type}')" alt="slide">`;
             sliderTrack.appendChild(slide);
         });
         document.getElementById(gridId).innerHTML = html;
     }
-
-    fillGrid('food-grid', foodImages, 'Item', 'food');
-    fillGrid('drinks-grid', drinkImages, 'Drink', 'drink');
-    fillGrid('sweets-grid', sweetImages, 'Sweet', 'sweet');
-
-    sliderTrack.innerHTML += sliderTrack.innerHTML;
 
     function showPage(pageId) {
         document.querySelectorAll('.page-content').forEach(p => {
@@ -351,7 +296,6 @@
         window.scrollTo(0,0);
     }
 
-    let cart = [], total = 0;
     function addItem(n, p) {
         cart.push({n,p});
         total += p;
@@ -362,12 +306,13 @@
         const name = document.getElementById('c-name').value;
         const phone = document.getElementById('c-phone').value;
         const addr = document.getElementById('c-addr').value;
-        if(!name || cart.length === 0) return alert("Please fill info and select items.");
+        if(!name || cart.length === 0) return alert(curLangKey === 'ar' ? "يرجى ملء البيانات واختيار الوجبات" : "Please fill info and select items.");
         let list = ""; cart.forEach(i => list += `- ${i.n} ($${i.p})%0A`);
         const msg = `Order:%0AName: ${name}%0APhone: ${phone}%0AAddress: ${addr}%0AItems:%0A${list}Total: $${total}`;
         window.open(`https://wa.me/966500000000?text=${msg}`, '_blank');
     }
 
+    // التشغيل الأولي
     setLang('ar');
 </script>
 </body>
